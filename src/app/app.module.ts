@@ -28,3 +28,11 @@ function mainReducer(state: {} = {}, action: any) {
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+/**
+ * TODO
+ *
+ * Get bugs from firebase via BugsService and bugs component
+ * Create beautiful login page
+ * Create pretty table with list of bugs
+ */
