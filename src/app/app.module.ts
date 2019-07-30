@@ -41,7 +41,12 @@ export class AppModule {}
 /**
  * TODO
  *
- * Get bugs from firebase via BugsService and bugs component
  * Create beautiful login page
- * Create pretty table with list of bugs
+ * Create smart components:
+ *  - table
+ *  - by user
+ *  - by month
+ *  - by day of the week
+ *  - by time of the day
+ *  - by browser
  */
