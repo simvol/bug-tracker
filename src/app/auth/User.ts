@@ -104,7 +104,6 @@ export class UserEffects {
       ofType(GET_USER),
       map((action: GetUser) => action.payload),
       switchMap(payload => this.afAuth.authState),
-      delay(2000), // delay to show loading spinner, delete me!
       map(authData => {
         if (authData) {
           /// User logged in

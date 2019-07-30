@@ -1,20 +1,47 @@
-<router-outlet></router-outlet>
-
-<div *ngIf="user$ | async as user">
-  <h1>Howdy, {{ user.displayName }}</h1>
-  <h4>{{ user.uid }}</h4>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="javascript:;">CS Portal</a>
   <button
-    *ngIf="!user.uid"
-    (click)="googleLogin()"
-    [class.is-loading]="user.loading"
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#cs-portal-nav"
+    aria-controls="cs-portal-nav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
   >
-    Sign In with Google
+    <span class="navbar-toggler-icon"></span>
   </button>
+  <div class="collapse navbar-collapse" id="cs-portal-nav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a
+          class="nav-link"
+          href="javascript:;"
+          routerLink="/"
+          routerLinkActive="active"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="javascript:;"
+          routerLink="/login"
+          routerLinkActive="active"
+          >Login</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="javascript:;"
+          routerLink="/bugs"
+          routerLinkActive="active"
+          >Bugs</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
 
-  <button *ngIf="user.uid" (click)="logout()">
-    Logout
-  </button>
-</div>
-
-<app-bug></app-bug>
+<router-outlet></router-outlet>
