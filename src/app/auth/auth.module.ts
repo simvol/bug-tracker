@@ -10,6 +10,8 @@ import { StoreModule } from '@ngrx/store';
 
 import { UserEffects, userReducer } from './User';
 import { LoginComponent } from './components/login/login.component';
+import { MaterialModule } from '../material/material.module';
+import { FormsModule } from '@angular/forms';
 
 // TODO user reducer
 
@@ -17,6 +19,8 @@ import { LoginComponent } from './components/login/login.component';
   declarations: [LoginComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    MaterialModule,
     AngularFireAuthModule,
     StoreModule.forFeature('user', userReducer),
     EffectsModule.forFeature([UserEffects])

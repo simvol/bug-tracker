@@ -1,0 +1,23 @@
+.container {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form-card {
+  width: 300px;
+}
+
+mat-card-title {
+  margin-bottom: 25px;
+}
+
+.login-form-field {
+  width: 100%;
+}
+
+.button-container {
+  margin-top: 20px;
+  text-align: right;
+}

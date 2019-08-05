@@ -1,4 +1,4 @@
-<div *ngIf="user$ | async as user">
+<!-- <div *ngIf="user$ | async as user">
   <h1>Howdy, {{ user.displayName }}</h1>
   <h4>{{ user.uid }}</h4>
 
@@ -13,4 +13,29 @@
   <button *ngIf="user.uid" (click)="logout()">
     Logout
   </button>
+</div> -->
+<div class="container">
+  <mat-card class="login-form-card">
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <mat-form-field class="login-form-field">
+        <input matInput placeholder="Email" />
+      </mat-form-field>
+
+      <mat-form-field class="login-form-field">
+        <input matInput placeholder="Password" />
+      </mat-form-field>
+
+      <div class="button-container">
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="googleLogin()"
+          [class.is-loading]="user?.loading"
+        >
+          Sign In
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

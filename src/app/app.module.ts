@@ -14,6 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { SharedModule } from './shared/shared.module';
 
 function mainReducer(state: {} = {}, action: any) {
   return state;
@@ -30,6 +31,7 @@ function mainReducer(state: {} = {}, action: any) {
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
+    SharedModule,
     AuthModule,
     BugsModule
   ],
