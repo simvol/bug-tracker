@@ -1,1 +1,29 @@
-<p>nav-panel works!</p>
+<div class="navigation">
+  <div class="logo font-indie">Bug Tracker</div>
+  <div class="controls">
+    <a
+      mat-button
+      href="javascript:;"
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      >Dashboard</a
+    >
+    <a
+      mat-button
+      href="javascript:;"
+      routerLink="/bugs"
+      routerLinkActive="active"
+      >Bugs</a
+    >
+    <a
+      mat-button
+      href="javascript:;"
+      routerLink="/explore"
+      routerLinkActive="active"
+      >Explore</a
+    >
+  </div>
+  <div class="user-info">
+    {{ (user$ | async).email }}
+  </div>
+</div>

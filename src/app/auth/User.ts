@@ -8,14 +8,14 @@ import { map, switchMap, delay, catchError } from 'rxjs/operators';
 // INTERFACE //
 export interface IUser {
   uid: string;
-  displayName: string;
+  email: string;
   loading?: boolean;
   error?: string;
 }
 
 // CLASS //
 export class User implements IUser {
-  constructor(public uid: string, public displayName: string) {}
+  constructor(public uid: string, public email: string) {}
 }
 
 // ACTIONS //
@@ -107,7 +107,7 @@ export class UserEffects {
       map(authData => {
         if (authData) {
           /// User logged in
-          const user = new User(authData.uid, authData.displayName);
+          const user = new User(authData.uid, authData.email);
           return new Authenticated(user);
         } else {
           /// User not logged in

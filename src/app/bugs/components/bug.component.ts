@@ -12,39 +12,7 @@ export interface PeriodicElement {
 }
 @Component({
   selector: 'app-bug',
-  template: `
-    <mat-tab-group>
-      <mat-tab label="First">
-        <table
-          mat-table
-          [dataSource]="(bugs$ | async).list"
-          class="mat-elevation-z8"
-        >
-          <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef>No.</th>
-            <td mat-cell *matCellDef="let element; let i = index">
-              {{ i + 1 }}
-            </td>
-          </ng-container>
-
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>User Email</th>
-            <td mat-cell *matCellDef="let element">{{ element.userEmail }}</td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-      </mat-tab>
-      <mat-tab label="Second"> Content 2 </mat-tab>
-      <mat-tab label="Third"> Content 3 </mat-tab>
-    </mat-tab-group>
-  `,
+  templateUrl: './bug.component.html',
   styleUrls: ['./bug.component.scss']
 })
 export class BugComponent implements OnInit, OnDestroy {
