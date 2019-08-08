@@ -1,0 +1,65 @@
+<mat-grid-list cols="5">
+  <mat-grid-tile colspan="1" rowspan="1">
+    <app-info-box
+      title="Outstanding bugs"
+      icon="bug"
+      [isFooterPositive]="false"
+      footerText="20.00% Since last monthx"
+      [isCenteredContent]="false"
+    >
+      <h1>28</h1>
+    </app-info-box>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <app-info-box
+      title="Clients remain affected"
+      icon="user"
+      [isFooterPositive]="true"
+      footerText="50.00% Since last month"
+      [isCenteredContent]="false"
+    >
+      <h1>5</h1>
+    </app-info-box>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" rowspan="2">
+    <canvas
+      class="mat-elevation-z1"
+      baseChart
+      [datasets]="monthlyReportSettings.data"
+      [labels]="monthlyReportSettings.labels"
+      [options]="monthlyReportSettings.options"
+      [legend]="monthlyReportSettings.isLegend"
+      [chartType]="monthlyReportSettings.type"
+    >
+    </canvas>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <app-info-box
+      title="New bugs"
+      icon="meteor"
+      [isFooterPositive]="false"
+      footerText="5.25% Since last month"
+      [isCenteredContent]="false"
+    >
+      <h1>2</h1>
+    </app-info-box>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <app-info-box
+      title="Unlucky client"
+      icon="sad-tear"
+      [isFooterPositive]="true"
+      footerText="62.50% More than other clients"
+      [isCenteredContent]="false"
+    >
+      <div>
+        <h2>Victoria Homes</h2>
+        <h3>experienced 18 errors</h3>
+      </div>
+    </app-info-box>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" rowspan="2">
+    One
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2" rowspan="2"> </mat-grid-tile>
+</mat-grid-list>

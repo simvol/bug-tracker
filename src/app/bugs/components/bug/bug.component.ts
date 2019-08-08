@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Bug, GetBugs } from '../Bug';
+import { Bug, GetBugs } from '../../Bug';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { BugsService } from '../services/bugs.service';
+import { BugsService } from '../../services/bugs.service';
 
 export interface PeriodicElement {
   name: string;
