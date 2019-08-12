@@ -6,15 +6,22 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { InfoBoxComponent } from './components/info-box/info-box.component';
+import { FirebaseDatePipe } from './pipes/firebase-date.pipe';
 
 @NgModule({
   declarations: [
     AuthorizedComponent,
     NavPanelComponent,
     PageNotFoundComponent,
-    InfoBoxComponent
+    InfoBoxComponent,
+    FirebaseDatePipe
   ],
   imports: [CommonModule, RouterModule, MaterialModule],
-  exports: [AuthorizedComponent, PageNotFoundComponent, InfoBoxComponent]
+  exports: [
+    AuthorizedComponent,
+    PageNotFoundComponent,
+    InfoBoxComponent,
+    FirebaseDatePipe
+  ]
 })
 export class SharedModule {}

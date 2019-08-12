@@ -60,6 +60,8 @@ export function bugsReducer(state: any = defaultState, action: BugsAction) {
       return { ...state, list: [...action.payload], loading: false };
     case GET_BUGS_FAIL:
       return { ...state, ...action.payload, loading: false };
+    default:
+      return state;
   }
 }
 

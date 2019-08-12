@@ -18,6 +18,7 @@ export interface PeriodicElement {
 export class BugComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['position', 'name'];
   bugs$: Observable<Bug[]>;
+  panelOpenState = false;
 
   constructor(private store: Store<any>, private bugsService: BugsService) {}
 

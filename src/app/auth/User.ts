@@ -91,6 +91,9 @@ export function userReducer(state: User = defaultUser, action: UserAction) {
 
     case LOGOUT:
       return { ...state, loading: true };
+
+    default:
+      return state;
   }
 }
 

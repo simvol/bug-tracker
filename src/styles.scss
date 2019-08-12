@@ -1,10 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import 'https://fonts.googleapis.com/css?family=Indie+Flower&display=swap';
+@import 'https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans&display=swap';
 @import 'https://pro.fontawesome.com/releases/v5.10.1/css/all.css';
 
 body {
   margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background: rgba(211, 211, 211, 0.15);
 }
 
 .font-indie {
