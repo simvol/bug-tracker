@@ -7,15 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
       <div class="header">
         <span>{{ title }}</span> <i class="icon fas fa-{{ icon }}"></i>
       </div>
-      <div
-        class="content"
-        [style.justifyContent]="isCenteredContent ? 'center' : 'initial'"
-      >
+      <div class="content">
         <ng-content></ng-content>
       </div>
       <div class="footer">
         <i
-          class="fas fa-{{ isFooterPositive ? 'arrow-up' : 'arrow-down' }}"
+          class="fas fa-{{
+            isFooterPositive ? 'arrow-up positive' : 'arrow-down negative'
+          }}"
         ></i>
         <span>{{ footerText }}</span>
       </div>

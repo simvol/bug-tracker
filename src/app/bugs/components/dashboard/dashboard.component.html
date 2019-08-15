@@ -1,5 +1,30 @@
-<mat-grid-list cols="5">
-  <mat-grid-tile colspan="1" rowspan="1">
+<div class="container">
+  <div class="info-box-container">
+    <app-info-box
+      title="Outstanding bugs"
+      icon="bug"
+      [isFooterPositive]="false"
+      footerText="20.00% &nbsp; Since last month"
+      [isCenteredContent]="false"
+    >
+      28
+    </app-info-box>
+  </div>
+  <div class="info-box-container">
+    <app-info-box
+      title="Clients remain affected"
+      icon="user"
+      [isFooterPositive]="true"
+      footerText="50.00% &nbsp; Since last month"
+      [isCenteredContent]="false"
+    >
+      5
+    </app-info-box>
+  </div>
+</div>
+
+<!-- <mat-grid-list cols="8" rows="2">
+  <mat-grid-tile colspan="2" rowspan="1">
     <app-info-box
       title="Outstanding bugs"
       icon="bug"
@@ -10,7 +35,7 @@
       <h1>28</h1>
     </app-info-box>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
+  <mat-grid-tile colspan="2" rowspan="1">
     <app-info-box
       title="Clients remain affected"
       icon="user"
@@ -21,7 +46,7 @@
       <h1>5</h1>
     </app-info-box>
   </mat-grid-tile>
-  <mat-grid-tile colspan="3" rowspan="2">
+  <mat-grid-tile colspan="4" rowspan="2">
     <canvas
       class="mat-elevation-z1"
       baseChart
@@ -33,7 +58,7 @@
     >
     </canvas>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
+  <mat-grid-tile colspan="2" rowspan="1">
     <app-info-box
       title="New bugs"
       icon="meteor"
@@ -44,7 +69,7 @@
       <h1>2</h1>
     </app-info-box>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
+  <mat-grid-tile colspan="2" rowspan="1">
     <app-info-box
       title="Unlucky client"
       icon="sad-tear"
@@ -58,8 +83,4 @@
       </div>
     </app-info-box>
   </mat-grid-tile>
-  <mat-grid-tile colspan="3" rowspan="2">
-    One
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2" rowspan="2"> </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->

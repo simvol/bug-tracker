@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { InfoBoxComponent } from './components/info-box/info-box.component';
 import { FirebaseDatePipe } from './pipes/firebase-date.pipe';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -16,12 +17,13 @@ import { FirebaseDatePipe } from './pipes/firebase-date.pipe';
     InfoBoxComponent,
     FirebaseDatePipe
   ],
-  imports: [CommonModule, RouterModule, MaterialModule],
+  imports: [CommonModule, RouterModule, MaterialModule, LayoutModule],
   exports: [
     AuthorizedComponent,
     PageNotFoundComponent,
     InfoBoxComponent,
-    FirebaseDatePipe
+    FirebaseDatePipe,
+    LayoutModule
   ]
 })
 export class SharedModule {}

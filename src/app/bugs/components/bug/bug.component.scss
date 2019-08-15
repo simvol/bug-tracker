@@ -4,15 +4,42 @@
   margin: 50px auto;
 }
 
+// Align descriptions in column
 .mat-expansion-panel-header-description,
 .mat-expansion-panel-header-title {
   flex-basis: 0;
 }
 
+// Make description text ellipsis...
 .mat-expansion-panel-header-description {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
   margin-right: 45px;
+}
+
+.radio-button-margin {
+  margin-right: 10px;
+}
+
+// Border to display status of the bug
+.mat-expansion-panel-header {
+  border-left: 7px solid;
+  border-bottom-left-radius: 1px;
+}
+.mat-expanded .mat-expansion-panel-header {
+  border-bottom-left-radius: 0;
+}
+.viewed-bug {
+  border-color: #03a9f4;
+}
+.new-bug {
+  border-color: #f44336;
+}
+.fixed-bug {
+  border-color: #8bc34a;
+}
+.progress-bug {
+  border-color: #ff9800;
 }

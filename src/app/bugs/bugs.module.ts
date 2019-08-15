@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { ChartsModule } from 'ng2-charts';
@@ -19,7 +20,8 @@ import { SharedModule } from '../shared/shared.module';
     EffectsModule.forFeature([BugsEffects]),
     MaterialModule,
     ChartsModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   exports: [BugComponent]
 })

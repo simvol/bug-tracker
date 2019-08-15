@@ -1,7 +1,17 @@
 <div class="container">
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let bug of (bugs$ | async)?.list">
-      <mat-expansion-panel-header>
+    <mat-expansion-panel
+      *ngFor="let bug of (bugs$ | async)?.list"
+      (afterExpand)="bug.isViewed = true"
+    >
+      <mat-expansion-panel-header
+        [ngClass]="{
+          'viewed-bug': bug.isViewed,
+          'new-bug': !bug.isViewed,
+          'fixed-bug': bug.status === 'resolved',
+          'progress-bug': bug.status === 'progress'
+        }"
+      >
         <mat-panel-title>
           {{ bug.userEmail }}
         </mat-panel-title>
@@ -12,6 +22,21 @@
       </mat-expansion-panel-header>
 
       {{ bug.message }}
+      <mat-action-row>
+        <section>
+          <mat-radio-group [(ngModel)]="bug.status">
+            <mat-radio-button class="radio-button-margin" value="unresolved">
+              Unresolved
+            </mat-radio-button>
+            <mat-radio-button class="radio-button-margin" value="progress">
+              In Progress
+            </mat-radio-button>
+            <mat-radio-button class="radio-button-margin" value="resolved">
+              Resolved
+            </mat-radio-button>
+          </mat-radio-group>
+        </section>
+      </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

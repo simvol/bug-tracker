@@ -18,12 +18,13 @@ export interface IBug {
 // CLASS //
 export class Bug implements IBug {
   constructor(
-    public id: number,
     public userEmail: string,
     public message: string,
     public date: number,
     public isSeen: boolean,
-    public isFixed: boolean
+    public isFixed: boolean,
+    public status: string,
+    public id?: number
   ) {}
 }
 
@@ -57,7 +58,14 @@ export function bugsReducer(state: any = defaultState, action: BugsAction) {
     case GET_BUGS:
       return { ...state, loading: true };
     case GET_BUGS_SUCCESS:
-      return { ...state, list: [...action.payload], loading: false };
+      return {
+        ...state,
+        list: action.payload.map((bug: Bug) => {
+          bug.status = bug.status || 'unresolved';
+          return bug;
+        }),
+        loading: false
+      };
     case GET_BUGS_FAIL:
       return { ...state, ...action.payload, loading: false };
     default:
