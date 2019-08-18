@@ -1,11 +1,78 @@
+@import '../../../styles/variables.scss';
+
+$info-box-height: 150;
+$box-margin: 25;
+
 .container {
-  max-width: 1000px;
+  max-width: 1300px;
   padding: 5px;
   margin: 0 auto;
 
-  .info-box-container {
+  .info-box-item {
     width: 100%;
-    height: 150px;
-    margin-top: 10px;
+    height: #{$info-box-height}px;
+    margin-top: #{$box-margin}px;
+  }
+
+  .monthly-graph-container,
+  .daily-graph-container,
+  .error-types-graph-container {
+    margin-top: #{$box-margin}px;
+    height: #{($info-box-height * 2) + $box-margin}px;
+    background: white;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+
+    .graph-header {
+      padding-top: 18px;
+      padding-left: 18px;
+    }
+
+    .graph-canvas {
+      margin: 0 auto;
+      margin-top: 30px;
+      width: 95%;
+      height: 80%;
+    }
+  }
+
+  .daily-graph-container,
+  .error-types-graph-container {
+    height: 500px;
+  }
+}
+
+@media screen and (min-width: #{$small}px) {
+  .container {
+    .info-box-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .info-box-item {
+        width: 48%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: #{$large}px) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    & > div {
+      width: 49%;
+    }
+
+    .daily-graph-container {
+      width: 58%;
+    }
+
+    .error-types-graph-container {
+      width: 40%;
+    }
   }
 }

@@ -1,25 +1,104 @@
 <div class="container">
   <div class="info-box-container">
-    <app-info-box
-      title="Outstanding bugs"
-      icon="bug"
-      [isFooterPositive]="false"
-      footerText="20.00% &nbsp; Since last month"
-      [isCenteredContent]="false"
-    >
-      28
-    </app-info-box>
+    <div class="info-box-item">
+      <app-info-box
+        title="Outstanding bugs"
+        icon="bug"
+        [isFooterPositive]="false"
+        footerText="20.00% &nbsp; Since last month"
+        [isCenteredContent]="false"
+      >
+        28
+      </app-info-box>
+    </div>
+    <div class="info-box-item">
+      <app-info-box
+        title="Clients remain affected"
+        icon="user"
+        [isFooterPositive]="true"
+        footerText="50.00% &nbsp; Since last month"
+        [isCenteredContent]="false"
+      >
+        5
+      </app-info-box>
+    </div>
+    <div class="info-box-item">
+      <app-info-box
+        title="New bugs"
+        icon="meteor"
+        [isFooterPositive]="false"
+        footerText="5.25% Since last month"
+        [isCenteredContent]="false"
+      >
+        2
+      </app-info-box>
+    </div>
+    <div class="info-box-item">
+      <app-info-box
+        title="Unlucky client"
+        icon="sad-tear"
+        [isFooterPositive]="true"
+        footerText="62.50% More than other clients"
+        [isCenteredContent]="false"
+      >
+        Victoria Homes <br />
+        <small style="font-size: 14px;">experienced 18 errors</small>
+      </app-info-box>
+    </div>
   </div>
-  <div class="info-box-container">
-    <app-info-box
-      title="Clients remain affected"
-      icon="user"
-      [isFooterPositive]="true"
-      footerText="50.00% &nbsp; Since last month"
-      [isCenteredContent]="false"
-    >
-      5
-    </app-info-box>
+
+  <!-- MONTHLY REPORT -->
+  <div class="monthly-graph-container mat-elevation-z1">
+    <div class="graph-header">
+      Monthly Report
+    </div>
+    <div class="graph-canvas">
+      <canvas
+        baseChart
+        [datasets]="monthlyReportSettings.data"
+        [labels]="monthlyReportSettings.labels"
+        [options]="monthlyReportSettings.options"
+        [legend]="monthlyReportSettings.isLegend"
+        [chartType]="monthlyReportSettings.type"
+      >
+      </canvas>
+    </div>
+  </div>
+
+  <!-- DAILY REPORT -->
+  <div class="daily-graph-container mat-elevation-z1">
+    <div class="graph-header">
+      Daily Report
+    </div>
+    <div class="graph-canvas">
+      <canvas
+        baseChart
+        [datasets]="dailyReportSettings.data"
+        [labels]="dailyReportSettings.labels"
+        [options]="dailyReportSettings.options"
+        [legend]="dailyReportSettings.isLegend"
+        [chartType]="dailyReportSettings.type"
+      >
+      </canvas>
+    </div>
+  </div>
+
+  <!-- ERROR TYPES -->
+  <div class="error-types-graph-container mat-elevation-z1">
+    <div class="graph-header">
+      Daily Report
+    </div>
+    <div class="graph-canvas">
+      <canvas
+        baseChart
+        [datasets]="errorTypeReportSettings.data"
+        [labels]="errorTypeReportSettings.labels"
+        [options]="errorTypeReportSettings.options"
+        [legend]="errorTypeReportSettings.isLegend"
+        [chartType]="errorTypeReportSettings.type"
+      >
+      </canvas>
+    </div>
   </div>
 </div>
 
