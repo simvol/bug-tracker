@@ -7,7 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 // INTERFACE //
 export interface IBug {
-  id?: number;
+  id?: string;
   userEmail: string;
   message: string;
   date: number;
@@ -24,7 +24,7 @@ export class Bug implements IBug {
     public isSeen: boolean,
     public isFixed: boolean,
     public status: string,
-    public id?: number
+    public id?: string
   ) {}
 }
 
@@ -32,6 +32,10 @@ export class Bug implements IBug {
 export const GET_BUGS = '[Bug] Get bugs';
 export const GET_BUGS_SUCCESS = '[Bug] Get bugs success';
 export const GET_BUGS_FAIL = '[Bug] Get bugs fail';
+export const CHANGE_BUG_STATUS = '[Bug] Change bug status';
+export const CHANGE_BUG_STATUS_SUCCESS = '[Bug] Change bug status success';
+export const CHANGE_BUG_STATUS_FAIL = '[Bug] Change bug status fail';
+export const UPDATE_FILTERED_LIST = '[Bug] Update filtered list';
 
 export class GetBugs implements Action {
   readonly type = GET_BUGS;
@@ -48,28 +52,84 @@ export class GetBugsFail implements Action {
   constructor(public payload?: any) {}
 }
 
-export type BugsAction = GetBugs | GetBugsSuccess | GetBugsFail;
+export class ChangeBugStatus implements Action {
+  readonly type = CHANGE_BUG_STATUS;
+  constructor(public payload?: any) {}
+}
+
+export class ChangeBugStatusSuccess implements Action {
+  readonly type = CHANGE_BUG_STATUS_SUCCESS;
+  constructor(public payload?: any) {}
+}
+
+export class ChangeBugStatusFail implements Action {
+  readonly type = CHANGE_BUG_STATUS_FAIL;
+  constructor(public payload?: any) {}
+}
+
+export class UpdateFilteredList implements Action {
+  readonly type = UPDATE_FILTERED_LIST;
+  constructor(public payload?: any) {}
+}
+
+export type BugsAction =
+  | GetBugs
+  | GetBugsSuccess
+  | GetBugsFail
+  | ChangeBugStatus
+  | ChangeBugStatusSuccess
+  | ChangeBugStatusFail
+  | UpdateFilteredList;
 
 // REDUCER //
-const defaultState = { loading: false, list: [] };
+const defaultState = {
+  loading: false,
+  list: [],
+  filteredList: [],
+  filterValue: null
+};
 
 export function bugsReducer(state: any = defaultState, action: BugsAction) {
   switch (action.type) {
     case GET_BUGS:
       return { ...state, loading: true };
     case GET_BUGS_SUCCESS:
+      const bugsList = action.payload.map((bug: Bug) => {
+        bug.status = bug.status || 'unresolved';
+        return bug;
+      });
+
       return {
         ...state,
-        list: action.payload.map((bug: Bug) => {
-          bug.status = bug.status || 'unresolved';
-          return bug;
-        }),
+        list: bugsList,
+        filteredList: getFilteredBugs(bugsList, state.filterValue),
         loading: false
       };
     case GET_BUGS_FAIL:
       return { ...state, ...action.payload, loading: false };
+    case CHANGE_BUG_STATUS:
+      return { ...state, loading: true };
+    case CHANGE_BUG_STATUS_FAIL:
+      return { ...state, loading: false };
+    case CHANGE_BUG_STATUS_SUCCESS:
+      return { ...state, loading: false };
+    case UPDATE_FILTERED_LIST:
+      return {
+        ...state,
+        filterValue: action.payload,
+        filteredList: getFilteredBugs(state.list, action.payload)
+      };
     default:
       return state;
+  }
+
+  function getFilteredBugs(bugs: Bug[], filterValue: string) {
+    return bugs.filter((bug: Bug) => {
+      const concatinatedBug =
+        bug.message + '&' + bug.status + '&' + bug.userEmail;
+
+      return !filterValue || concatinatedBug.indexOf(filterValue) !== -1;
+    });
   }
 }
 
@@ -86,13 +146,38 @@ export class BugsEffects {
         return from(this.getBugs());
       }),
       map(bugs => {
+        // I have no idea why this is re-firing each time data changes
+        // Observables magic? switchMap magic?
         return new GetBugsSuccess(bugs);
       }),
       catchError(error => of(new GetBugsFail(error)))
     )
   );
 
+  changeBugStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CHANGE_BUG_STATUS),
+      map((action: ChangeBugStatus) => action.payload),
+      switchMap(({ bug, status }) => {
+        return from(this.changeBugStatus(bug, status));
+      }),
+      map(bugs => {
+        return new ChangeBugStatusSuccess(bugs);
+      }),
+      catchError(error => of(new ChangeBugStatusFail(error)))
+    )
+  );
+
   getBugs(): any {
-    return this.db.collection('bugs').valueChanges();
+    return this.db.collection('bugs').valueChanges({ idField: 'id' });
+  }
+
+  changeBugStatus(bug: Bug, status: string): any {
+    const updatedBug = { ...bug, status };
+
+    return this.db
+      .collection('bugs')
+      .doc(updatedBug.id)
+      .update(updatedBug);
   }
 }

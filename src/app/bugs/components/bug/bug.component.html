@@ -1,7 +1,15 @@
 <div class="container">
+  <div class="controls-panel">
+    <mat-form-field appearance="legacy">
+      <mat-label>Search</mat-label>
+      <input matInput [formControl]="filterFormControl" />
+      <i matSuffix class="fas fa-search"></i>
+    </mat-form-field>
+  </div>
+
   <mat-accordion>
     <mat-expansion-panel
-      *ngFor="let bug of (bugs$ | async)?.list"
+      *ngFor="let bug of (bugs$ | async)?.filteredList"
       (afterExpand)="bug.isViewed = true"
     >
       <mat-expansion-panel-header
@@ -24,7 +32,13 @@
       {{ bug.message }}
       <mat-action-row>
         <section>
-          <mat-radio-group [(ngModel)]="bug.status">
+          <span *ngIf="bug.updated">Updated by: {{ bug.updated }}</span>
+        </section>
+        <section>
+          <mat-radio-group
+            [(ngModel)]="bug.status"
+            (change)="changedStatus(bug, $event)"
+          >
             <mat-radio-button class="radio-button-margin" value="unresolved">
               Unresolved
             </mat-radio-button>

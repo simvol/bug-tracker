@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-info-box',
   template: `
-    <div class="container mat-elevation-z1">
+    <div class="container component-container">
       <div class="header">
         <span>{{ title }}</span> <i class="icon fas fa-{{ icon }}"></i>
       </div>

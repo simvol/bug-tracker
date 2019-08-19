@@ -19,7 +19,6 @@ $box-margin: 25;
   .error-types-graph-container {
     margin-top: #{$box-margin}px;
     height: #{($info-box-height * 2) + $box-margin}px;
-    background: white;
     font-size: 15px;
     display: flex;
     flex-direction: column;

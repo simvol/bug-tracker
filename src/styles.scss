@@ -6,10 +6,15 @@
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  background: rgba(211, 211, 211, 0.15);
   color: #333;
 }
 
 .font-indie {
   font-family: 'Indie Flower', cursive;
+}
+
+.component-container {
+  background: rgba(204, 204, 206, 0.1);
+  border: 1px solid rgba(10, 150, 150, 0.1);
+  border-radius: 5px;
 }

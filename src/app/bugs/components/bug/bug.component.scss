@@ -1,7 +1,14 @@
 .container {
   max-width: 1000px;
   min-width: 320px;
-  margin: 50px auto;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.controls-panel {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 // Align descriptions in column

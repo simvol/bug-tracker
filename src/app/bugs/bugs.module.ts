@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { ChartsModule } from 'ng2-charts';
@@ -21,7 +21,8 @@ import { SharedModule } from '../shared/shared.module';
     MaterialModule,
     ChartsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [BugComponent]
 })
