@@ -15,12 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SharedModule } from './shared/shared.module';
-// import { bugsReducer } from './bugs/Bug';
-// import { userReducer } from './auth/User';
-
-// function mainReducer(state: {} = {}, action: any) {
-//   return state;
-// }
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +30,8 @@ import { SharedModule } from './shared/shared.module';
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
     SharedModule,
     AuthModule,
-    BugsModule
+    BugsModule,
+    SettingsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

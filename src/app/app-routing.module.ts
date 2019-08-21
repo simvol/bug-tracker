@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { AuthGuard } from './auth/guards/auth.guard';
 import { DashboardComponent } from './bugs/components/dashboard/dashboard.component';
 import { ExploreComponent } from './bugs/components/explore/explore.component';
+import { SettingsComponent } from './settings/components/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'explore',
         component: ExploreComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
       },
       { path: '', redirectTo: 'bugs', pathMatch: 'full' }
     ]
