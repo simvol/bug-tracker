@@ -1,0 +1,24 @@
+.container {
+  max-width: 1000px;
+  min-width: 320px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+mat-card {
+  background: rgba(204, 204, 206, 0.1);
+}
+mat-card-title {
+  margin-bottom: 30px;
+}
+
+.mat-form-group {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+mat-form-field {
+  flex-grow: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+}

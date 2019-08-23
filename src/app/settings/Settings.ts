@@ -9,6 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export interface IErrorType {
   label: string;
   regexp: string;
+  id: string;
 }
 export interface ISettings {
   id: string;
@@ -30,9 +31,9 @@ export const GET_SETTINGS = '[Settings] Get settings';
 export const GET_SETTINGS_SUCCESS = '[Settings] Get settings success';
 export const GET_SETTINGS_FAIL = '[Settings] Get settings fail';
 
-export const CHANGE_SETTINGS = '[Settings] Get settings';
-export const CHANGE_SETTINGS_SUCCESS = '[Settings] Get settings success';
-export const CHANGE_SETTINGS_FAIL = '[Settings] Get settings fail';
+export const CHANGE_SETTINGS = '[Settings] Change settings';
+export const CHANGE_SETTINGS_SUCCESS = '[Settings] Change settings success';
+export const CHANGE_SETTINGS_FAIL = '[Settings] Change settings fail';
 
 export class GetSettings implements Action {
   readonly type = GET_SETTINGS;
@@ -73,13 +74,17 @@ export type SettingssAction =
   | ChangeSettingsFail;
 
 // REDUCER //
-const defaultState = {
+export interface IDefaultSettingsState {
+  loading: boolean;
+  errorTypes: [];
+}
+export const defaultSettingsState: IDefaultSettingsState = {
   loading: false,
-  settings: {}
+  errorTypes: []
 };
 
 export function settingsReducer(
-  state: any = defaultState,
+  state: any = defaultSettingsState,
   action: SettingssAction
 ) {
   switch (action.type) {
@@ -88,7 +93,7 @@ export function settingsReducer(
     case GET_SETTINGS_SUCCESS:
       return {
         ...state,
-        settings: action.payload,
+        errorTypes: action.payload.errorTypes,
         loading: false
       };
     case GET_SETTINGS_FAIL:
@@ -127,7 +132,7 @@ export class SettingsEffects {
     this.actions$.pipe(
       ofType(CHANGE_SETTINGS),
       map((action: ChangeSettings) => action.payload),
-      switchMap(({ settings }) => {
+      switchMap(settings => {
         return from(this.changeSettings(settings));
       }),
       map(settings => {

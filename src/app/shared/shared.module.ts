@@ -8,6 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { InfoBoxComponent } from './components/info-box/info-box.component';
 import { FirebaseDatePipe } from './pipes/firebase-date.pipe';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -15,15 +16,18 @@ import { LayoutModule } from '@angular/cdk/layout';
     NavPanelComponent,
     PageNotFoundComponent,
     InfoBoxComponent,
-    FirebaseDatePipe
+    FirebaseDatePipe,
+    ConfirmationDialogComponent
   ],
   imports: [CommonModule, RouterModule, MaterialModule, LayoutModule],
+  entryComponents: [ConfirmationDialogComponent],
   exports: [
     AuthorizedComponent,
     PageNotFoundComponent,
     InfoBoxComponent,
     FirebaseDatePipe,
-    LayoutModule
+    LayoutModule,
+    ConfirmationDialogComponent
   ]
 })
 export class SharedModule {}
