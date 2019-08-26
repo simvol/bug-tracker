@@ -13,6 +13,7 @@ export interface IBug {
   date: number;
   isSeen?: boolean;
   isFixed?: boolean;
+  allText?: string;
 }
 
 // CLASS //
@@ -24,7 +25,8 @@ export class Bug implements IBug {
     public isSeen: boolean,
     public isFixed: boolean,
     public status: string,
-    public id?: string
+    public id?: string,
+    public allText?: string
   ) {}
 }
 
@@ -82,11 +84,17 @@ export type BugsAction =
   | UpdateFilteredList;
 
 // REDUCER //
+export interface IDefaultState {
+  loading: boolean;
+  list: Bug[];
+  filteredList: Bug[];
+  filters: string[];
+}
 const defaultState = {
   loading: false,
   list: [],
   filteredList: [],
-  filterValue: null
+  filters: []
 };
 
 export function bugsReducer(state: any = defaultState, action: BugsAction) {
@@ -102,7 +110,7 @@ export function bugsReducer(state: any = defaultState, action: BugsAction) {
       return {
         ...state,
         list: bugsList,
-        filteredList: getFilteredBugs(bugsList, state.filterValue),
+        filteredList: getFilteredBugs(bugsList, state.filters),
         loading: false
       };
     case GET_BUGS_FAIL:
@@ -116,20 +124,34 @@ export function bugsReducer(state: any = defaultState, action: BugsAction) {
     case UPDATE_FILTERED_LIST:
       return {
         ...state,
-        filterValue: action.payload,
+        filters: action.payload,
         filteredList: getFilteredBugs(state.list, action.payload)
       };
     default:
       return state;
   }
+  // TODO why this action is fired bunch of times??
+  function getFilteredBugs(bugs: Bug[], filters: string[]) {
+    const [type, search] = filters;
 
-  function getFilteredBugs(bugs: Bug[], filterValue: string) {
-    return bugs.filter((bug: Bug) => {
-      const concatinatedBug =
-        bug.message + '&' + bug.status + '&' + bug.userEmail;
+    if (!type && !search) {
+      return bugs;
+    }
 
-      return !filterValue || concatinatedBug.indexOf(filterValue) !== -1;
-    });
+    return bugs
+      .map((bug: Bug) => {
+        const concatinatedBug =
+          bug.message + '&' + bug.status + '&' + bug.userEmail;
+        return { ...bug, allText: concatinatedBug };
+      })
+      .filter((bug: Bug) => {
+        const regexp = new RegExp(type);
+
+        return !type || regexp.test(bug.allText);
+      })
+      .filter((bug: Bug) => {
+        return !search || bug.allText.indexOf(search) !== -1;
+      });
   }
 }
 

@@ -2,8 +2,8 @@
   <div class="controls-panel">
     <mat-form-field style="margin-right: 20px;">
       <mat-label>Bug type</mat-label>
-      <mat-select>
-        <mat-option value="null">None </mat-option>
+      <mat-select [formControl]="typeFormControl">
+        <mat-option>None </mat-option>
         <mat-option
           *ngFor="let type of (settings$ | async)?.errorTypes"
           [value]="type.regexp"

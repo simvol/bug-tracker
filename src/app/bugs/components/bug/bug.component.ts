@@ -1,10 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Bug, ChangeBugStatus, UpdateFilteredList } from '../../Bug';
 import { Store, select } from '@ngrx/store';
-import { Observable, of, forkJoin, zip, combineLatest, timer } from 'rxjs';
+import {
+  Observable,
+  of,
+  forkJoin,
+  zip,
+  combineLatest,
+  timer,
+  concat,
+  merge,
+  BehaviorSubject
+} from 'rxjs';
 import { BugsService } from '../../services/bugs.service';
 import { FormControl, NgForm } from '@angular/forms';
-import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {
+  switchMap,
+  debounceTime,
+  distinctUntilChanged,
+  defaultIfEmpty
+} from 'rxjs/operators';
 import { Settings } from 'src/app/settings/Settings';
 import { SettingsService } from 'src/app/settings/services/settings.service';
 
@@ -39,36 +54,15 @@ export class BugComponent implements OnInit, OnDestroy {
   }
 
   addFiltersListeners() {
-    const selectTypeValues = this.typeFormControl.valueChanges;
-    const searchValues = this.filterFormControl.valueChanges;
+    const initialTypeValue = new BehaviorSubject(null);
+    const initialSearchValue = new BehaviorSubject(null);
 
-    // combineLatest(selectTypeValues, searchValues)
-    // .pipe(
-    //   debounceTime(250),
-    //   distinctUntilChanged(),
-    //   switchMap(val => {
-    //     console.log(val);
-    //     this.store.dispatch(new UpdateFilteredList(val));
-    //     return of(val);
-    //   })
-    // )
-    // .subscribe(([val]) => console.log('value', val));
+    this.typeFormControl.valueChanges.subscribe(initialTypeValue);
+    this.filterFormControl.valueChanges.subscribe(initialSearchValue);
 
-    // const firstTimer = timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
-    // const secondTimer = timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
-    const combinedTimers = combineLatest(selectTypeValues, searchValues);
-    combinedTimers.subscribe(value => console.log(value));
-
-    // const searchValues = this.filterFormControl.valueChanges
-    //   .pipe(
-    //     debounceTime(250),
-    //     distinctUntilChanged(),
-    //     switchMap(val => {
-    //       this.store.dispatch(new UpdateFilteredList(val));
-    //       return of(val);
-    //     })
-    //   )
-    //   .subscribe();
+    combineLatest(initialTypeValue, initialSearchValue).subscribe(res => {
+      this.bugsService.updateFilteredList(res);
+    });
   }
 
   changedStatus(bug: Bug, $event: any) {
