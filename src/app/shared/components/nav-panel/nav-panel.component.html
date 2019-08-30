@@ -30,5 +30,10 @@
       >Settings</a
     >
   </div>
-  <div class="user-info">{{ (user$ | async)?.email }}</div>
+  <div class="user-info">
+    <div style="margin-left: 10px; margin-right: 10px;">
+      {{ (user$ | async)?.email }}
+    </div>
+    <button mat-button (click)="logout()">Log out</button>
+  </div>
 </div>

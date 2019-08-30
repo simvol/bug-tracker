@@ -5,6 +5,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { from, of } from 'rxjs';
 import { map, switchMap, delay, catchError } from 'rxjs/operators';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 // INTERFACE //
 export interface IUser {
   uid: string;

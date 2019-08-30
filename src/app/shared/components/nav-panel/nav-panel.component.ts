@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/auth/User';
+import { User, Logout } from 'src/app/auth/User';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -15,5 +15,9 @@ export class NavPanelComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this.store.select('user');
+  }
+
+  logout() {
+    this.store.dispatch(new Logout());
   }
 }

@@ -131,6 +131,7 @@ export function bugsReducer(state: any = defaultState, action: BugsAction) {
       return state;
   }
   // TODO why this action is fired bunch of times??
+  // Is this a right way to do it? Should I use an @effect instead?
   function getFilteredBugs(bugs: Bug[], filters: string[]) {
     const [type, search] = filters;
 
