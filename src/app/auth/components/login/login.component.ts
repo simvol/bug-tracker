@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User, GetUser } from '../../User';
+import { User, GetUser, IUser } from '../../User';
 import { Store } from '@ngrx/store';
 import { UserService } from '../../services/user.service';
 
@@ -14,7 +14,7 @@ interface AuthState {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  user$: Observable<User>;
+  user$: Observable<IUser>;
 
   constructor(
     private store: Store<AuthState>,
